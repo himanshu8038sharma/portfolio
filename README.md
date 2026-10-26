@@ -1,6 +1,5 @@
 # Himanshu Sharma - Portfolio
-
-A dark, single-page portfolio built with Python and Streamlit.
+ portfolio built with Python and Streamlit.
 
 ## Run locally
 
