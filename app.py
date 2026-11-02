@@ -5,7 +5,7 @@ from pathlib import Path
 import streamlit as st
 FIRST_NAME = "Himanshu"
 NAME = "Himanshu Sharma"
-ROLE = "Aspiring AI/ML Engineer"
+ROLE = " AI/ML Engineer"
 LOCATION = "Shimla, Himachal Pradesh, India"
 GITHUB_USER = "himanshu8038sharma"
 EMAIL = "hs2660815@gmail.com"     
@@ -13,7 +13,7 @@ LINKEDIN = "https://www.linkedin.com/in/himanshu-sharma-36215534a/?isSelfProfile
 RESUME = Path("assets/resume.pdf")        
 PHOTO_CANDIDATES = ["assets/profile.jpg", "assets/profile.png", "assets/profile.jpeg"]
 STATUS = "open to AI/ML fresher opportunities"
-TYPING_LINE = "Aspiring ML Engineer  |  Generative AI  |  Reinforcement Learning"
+TYPING_LINE = " ML Engineer  |  Generative AI  |  Reinforcement Learning"
 HERO_TEXT = (
     "I'm a Computer Science engineering student interested in building "
         "practical AI and machine learning solutions. I enjoy working with data, "
@@ -56,13 +56,13 @@ INTERESTS = [
 ]
 EXPERIENCE = [
     {
-        "role": "AI/ML Trainee",
+        "role": "AI/ML Intern",
         "org": "Inphora Pvt. Ltd.",
-        "period": "45-Day Industrial Training",
+        "period": "6 Weeks Internship | 2026",
         "points": [
-            "Completed practical training in machine learning concepts and workflows.",
-            "Gained exposure to data preprocessing, model development, and evaluation.",
-            "Applied machine learning techniques through hands-on project work."
+            "Executed practical machine learning workflows involving data preparation, preprocessing, and model development.",
+            "Implemented ML techniques and evaluated model performance using relevant evaluation metrics.",
+            "Applied theoretical machine learning concepts to hands-on projects and real-world problem-solving scenarios."
         ],
         "certificates": [
             {"title": "Internship Completion Certificate", "file": "assets/certificates/inphora/internship.png"},
@@ -247,52 +247,29 @@ h1,h2,h3,h4 { font-family:var(--fh); color:var(--text); }
 .card:hover { transform:translateY(-4px); border-color:rgba(var(--ar),.5); }
 .card h4 { margin:.7rem 0 .6rem; font-size:1.02rem; }
 .card p { color:var(--muted); margin:0; line-height:1.55; font-size:.93rem; }
-.cgrid {
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:1rem;
-    align-items:stretch;
-}
-.cgrid .card {
-    height:100%;
-    box-sizing:border-box;
-}
-@media (max-width:1000px) {
-    .cgrid { grid-template-columns:repeat(2,1fr); }
-}
-@media (max-width:560px) {
-    .cgrid { grid-template-columns:1fr; }
-}
+.cgrid { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; align-items:stretch; }
+.cgrid .card { height:100%; box-sizing:border-box; }
+@media (max-width:1000px){ .cgrid { grid-template-columns:repeat(2,1fr); } }
+@media (max-width:560px){ .cgrid { grid-template-columns:1fr; } }
 .card .ico { width:34px; height:34px; stroke:var(--accent); fill:none; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
 /* project cards */
 div[data-testid="stVerticalBlockBorderWrapper"] { background:var(--surface); border:1px solid var(--line) !important; border-radius:var(--rad);
   transition:transform .25s, border-color .25s, box-shadow .25s; animation:rise .8s ease both; }
 div[data-testid="stVerticalBlockBorderWrapper"]:hover { transform:translateY(-5px); border-color:rgba(var(--ar),.5) !important; box-shadow:0 16px 36px rgba(0,0,0,.5); }
-.ph { aspect-ratio:1/1; border-radius:10px; display:flex; align-items:center; justify-content:center; text-align:center; padding:1rem;
+.ph { aspect-ratio:1/1; margin-bottom:1rem; border-radius:10px; display:flex; align-items:center; justify-content:center; text-align:center; padding:1rem;
   background:linear-gradient(135deg,var(--t1) 0%,var(--t2) 100%); border:1px solid var(--line); font-family:var(--fh); font-weight:700; color:var(--muted); }
 .ptitle { font-family:var(--fh); font-size:1.08rem; font-weight:700; margin:.7rem 0 .35rem; }
 .pdesc { color:var(--muted); line-height:1.55; font-size:.88rem; margin-bottom:.7rem; height:5.4rem; overflow:hidden; }
 .ptags { min-height:7rem; }
-
-div[data-testid="stImage"] img {
-    aspect-ratio:1/1;
-    object-fit:cover;
-    width:100%;
-}
-
-@media (max-width:1150px) {
-    .ptitle { min-height:3.5rem; }
-}
-@media (max-width:1050px) {
-    .ptags { min-height:9rem; }
-}
-@media (max-width:920px) {
-    .ptags { min-height:11rem; }
-    .plinks { min-height:3.4rem; }
-}
-@media (max-width:640px) {
-    .ptitle, .ptags, .plinks { min-height:0; }
-}
+/* every project card stretches to the tallest card in its row (font-independent) */
+div[data-testid="stColumn"] > div[data-testid="stVerticalBlock"] { height:100%; }
+div[data-testid="stColumn"] > div[data-testid="stVerticalBlock"] > div[data-testid="stLayoutWrapper"] { flex:1 1 auto; }
+div[data-testid="stColumn"] > div[data-testid="stVerticalBlock"] > div[data-testid="stLayoutWrapper"] > div[data-testid="stVerticalBlock"] { height:100%; }
+@media (max-width:1150px){ .ptitle { min-height:3.5rem; } }
+@media (max-width:1050px){ .ptags { min-height:9rem; } }
+@media (max-width:920px){ .ptags { min-height:11rem; } .plinks { min-height:3.4rem; } }
+@media (max-width:640px){ .ptitle, .ptags, .plinks { min-height:0; } }
+div[data-testid="stImage"] img { aspect-ratio:1/1; object-fit:cover; width:100%; }
 .plinks { padding:.2rem 0 .6rem; }
 .plinks a { margin-right:1.1rem; font-weight:500; font-size:.86rem; }
 .plinks a:hover { text-decoration:underline !important; }
@@ -480,12 +457,11 @@ st.markdown(
     '<div class="cgrid">' + "".join(
         f'<div class="card">{ICONS[icon]}<h4>{group}</h4>{pills(items)}</div>'
         for icon, group, items in SKILLS
-    )+ '</div>',
+    ) + '</div>',
     unsafe_allow_html=True,
-    )
+)
 
 heading("Technical", "Interests")
-
 st.markdown(
     '<div class="cgrid">' + "".join(
         f'<div class="card"><h4 style="margin-top:0;color:var(--accent)">{t}</h4><p>{d}</p></div>'
@@ -493,7 +469,8 @@ st.markdown(
     ) + '</div>',
     unsafe_allow_html=True,
 )
-   
+
+
 # Projects (3-column grid)
 
 heading("Featured", "Projects", "projects", "Selected work across machine learning, reinforcement learning and LLM agents.")
