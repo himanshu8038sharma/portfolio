@@ -247,15 +247,52 @@ h1,h2,h3,h4 { font-family:var(--fh); color:var(--text); }
 .card:hover { transform:translateY(-4px); border-color:rgba(var(--ar),.5); }
 .card h4 { margin:.7rem 0 .6rem; font-size:1.02rem; }
 .card p { color:var(--muted); margin:0; line-height:1.55; font-size:.93rem; }
+.cgrid {
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1rem;
+    align-items:stretch;
+}
+.cgrid .card {
+    height:100%;
+    box-sizing:border-box;
+}
+@media (max-width:1000px) {
+    .cgrid { grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:560px) {
+    .cgrid { grid-template-columns:1fr; }
+}
 .card .ico { width:34px; height:34px; stroke:var(--accent); fill:none; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
 /* project cards */
 div[data-testid="stVerticalBlockBorderWrapper"] { background:var(--surface); border:1px solid var(--line) !important; border-radius:var(--rad);
   transition:transform .25s, border-color .25s, box-shadow .25s; animation:rise .8s ease both; }
 div[data-testid="stVerticalBlockBorderWrapper"]:hover { transform:translateY(-5px); border-color:rgba(var(--ar),.5) !important; box-shadow:0 16px 36px rgba(0,0,0,.5); }
-.ph { aspect-ratio:16/10; border-radius:10px; display:flex; align-items:center; justify-content:center; text-align:center; padding:1rem;
+.ph { aspect-ratio:1/1; border-radius:10px; display:flex; align-items:center; justify-content:center; text-align:center; padding:1rem;
   background:linear-gradient(135deg,var(--t1) 0%,var(--t2) 100%); border:1px solid var(--line); font-family:var(--fh); font-weight:700; color:var(--muted); }
 .ptitle { font-family:var(--fh); font-size:1.08rem; font-weight:700; margin:.7rem 0 .35rem; }
 .pdesc { color:var(--muted); line-height:1.55; font-size:.88rem; margin-bottom:.7rem; height:5.4rem; overflow:hidden; }
+.ptags { min-height:7rem; }
+
+div[data-testid="stImage"] img {
+    aspect-ratio:1/1;
+    object-fit:cover;
+    width:100%;
+}
+
+@media (max-width:1150px) {
+    .ptitle { min-height:3.5rem; }
+}
+@media (max-width:1050px) {
+    .ptags { min-height:9rem; }
+}
+@media (max-width:920px) {
+    .ptags { min-height:11rem; }
+    .plinks { min-height:3.4rem; }
+}
+@media (max-width:640px) {
+    .ptitle, .ptags, .plinks { min-height:0; }
+}
 .plinks { padding:.2rem 0 .6rem; }
 .plinks a { margin-right:1.1rem; font-weight:500; font-size:.86rem; }
 .plinks a:hover { text-decoration:underline !important; }
@@ -439,18 +476,24 @@ st.markdown(f'{about_html}<p class="lead"><strong style="color:var(--text)">Educ
 # Skills and interests
 
 heading("My", "Skills", "skills")
-cols = st.columns(4, gap="medium")
-for col, (icon, group, items) in zip(cols, SKILLS):
-    with col:
-        st.markdown(f'<div class="card" style="min-height:235px">{ICONS[icon]}<h4>{group}</h4>{pills(items)}</div>', unsafe_allow_html=True)
+st.markdown(
+    '<div class="cgrid">' + "".join(
+        f'<div class="card">{ICONS[icon]}<h4>{group}</h4>{pills(items)}</div>'
+        for icon, group, items in SKILLS
+    )+ '</div>',
+    unsafe_allow_html=True,
+    )
 
 heading("Technical", "Interests")
-icols = st.columns(len(INTERESTS), gap="medium")
-for col, (t, d) in zip(icols, INTERESTS):
-    with col:
-        st.markdown(f'<div class="card" style="min-height:150px"><h4 style="margin-top:0;color:var(--accent)">{t}</h4><p>{d}</p></div>', unsafe_allow_html=True)
 
-
+st.markdown(
+    '<div class="cgrid">' + "".join(
+        f'<div class="card"><h4 style="margin-top:0;color:var(--accent)">{t}</h4><p>{d}</p></div>'
+        for t, d in INTERESTS
+    ) + '</div>',
+    unsafe_allow_html=True,
+)
+   
 # Projects (3-column grid)
 
 heading("Featured", "Projects", "projects", "Selected work across machine learning, reinforcement learning and LLM agents.")
@@ -471,7 +514,7 @@ for start in range(0, len(PROJECTS), 3):
                 links += f'<a href="{p["repo"] or GITHUB_URL}" target="_blank">Source Code →</a>'
                 st.markdown(
                     f'<div class="ptitle">{p["title"]}</div><div class="pdesc">{p["desc"]}</div>'
-                    f'<div>{pills(p["tags"])}</div><div class="plinks">{links}</div>',
+                    f'<div class="ptags">{pills(p["tags"])}</div><div class="plinks">{links}</div>',
                     unsafe_allow_html=True,
                 )
                 if len(imgs) > 1:
